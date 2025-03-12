@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
-        "src/pendu"
+        "src/pendu",
+        "src/paint"
     ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [

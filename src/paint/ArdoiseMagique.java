@@ -30,7 +30,7 @@ public class ArdoiseMagique extends JFrame {
         add(panelPrincipal);
         
         // Zone de dessin
-        DrawingArea areaDessin = new DrawingArea();
+        DrawingArea areaDessin = new DrawingArea(this);
         panelPrincipal.add(areaDessin, BorderLayout.CENTER);
         
         // Barre d'outils
@@ -69,6 +69,10 @@ public class ArdoiseMagique extends JFrame {
         toolbar.add(boutonGomme);
         
         setVisible(true);
+    }
+      
+    public Color getCouleurActuelle() {
+        return couleurActuelle;
     }
     
     public static void main(String[] args) {

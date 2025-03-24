@@ -10,19 +10,22 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class DrawingArea extends JPanel {
-    private Color couleurActuelle = Color.RED;
+    private final ArdoiseMagique ardoise;  // Référence à la fenêtre principale
     private Point debut = null;
     private boolean gommeActive = false;
     private Stack<Image> historiqueImages = new Stack<>();
     
-    public DrawingArea() {
+    public DrawingArea(ArdoiseMagique ardoise) {
+        this.ardoise = ardoise;
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(600, 300));
+        
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 debut = e.getPoint();
             }
         });
+        
         addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
                 if (debut != null) {
@@ -31,7 +34,8 @@ public class DrawingArea extends JPanel {
                         g.setColor(Color.WHITE);  // Gomme = fond blanc
                         g.fillRect(e.getX() - 5, e.getY() - 5, 10, 10);
                     } else {
-                        g.setColor(couleurActuelle);
+                        // Utilisez la couleur de l'ardoise
+                        g.setColor(ardoise.getCouleurActuelle());
                         g.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     }
                     debut = e.getPoint();
@@ -39,7 +43,6 @@ public class DrawingArea extends JPanel {
             }
         });
     }
-
     public void clear() {
         historiqueImages.clear();
         repaint();

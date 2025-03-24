@@ -18,7 +18,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class ArdoiseMagique extends JFrame {
     private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
     private Point debut = null;
-
+    
     public ArdoiseMagique() {
         setTitle("Ardoise Magique");
         setSize(600, 400);
@@ -39,7 +39,12 @@ public class ArdoiseMagique extends JFrame {
         
         // Boutons de couleur (niveau facile)
         JButton boutonRouge = new JButton("Rouge");
-        boutonRouge.addActionListener(e -> couleurActuelle = Color.RED);
+        boutonRouge.addActionListener(e ->{ 
+            couleurActuelle = Color.RED;
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }
+        });
         toolbar.add(boutonRouge);
         
         JButton boutonVert = new JButton("Vert");

@@ -51,14 +51,12 @@ public class DrawingArea extends JPanel {
     public void activerGomme() {
         gommeActive = !gommeActive;
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Repeindre l'historique (si besoin de restaurer l'image après effacement)
-        if (!historiqueImages.isEmpty()) {
-            g.drawImage(historiqueImages.peek(), 0, 0, this);
-        }
+    public boolean getGommeActive(){
+        return gommeActive;
     }
+    
+   public void setGommeActive(boolean etat) {
+    this.gommeActive = etat;
+}
 }
 

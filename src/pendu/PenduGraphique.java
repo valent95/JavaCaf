@@ -1,5 +1,3 @@
-//package pendu;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,16 +11,23 @@ public class PenduGraphique extends JFrame {
     private String mot;
     private char[] motCache;
     private int erreurs = 0;
-    private String[] dictionnaire = {"java", "programmation", "ordinateur", "pendu"};;
+    private String[] dictionnaire = {"java", "programmation", "ordinateur", "pendu"};
     private char[] clavierAZERTY = {'a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'};
+    private ImageIcon[] etapesPendu;
 
     public PenduGraphique() {
         setTitle("Jeu du Pendu");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Tirage du mot à deviner 
+        // Charger les images pour les étapes du pendu
+        etapesPendu = new ImageIcon[7];
+        for (int i = 1; i < 7; i++) {
+            etapesPendu[i] = new ImageIcon("src/pendu/pendu" + i + ".png");
+        }
+
+        // Tirage du mot à deviner
         mot = dictionnaire[new Random().nextInt(dictionnaire.length)];
         motCache = new char[mot.length()];
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
@@ -33,28 +38,27 @@ public class PenduGraphique extends JFrame {
         add(motLabel, BorderLayout.NORTH);
 
         // Section dessin du pendu
-        dessinPenduLabel = new JLabel("", SwingConstants.CENTER);
-        dessinPenduLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        dessinPenduLabel = new JLabel(etapesPendu[0], SwingConstants.CENTER);
         add(dessinPenduLabel, BorderLayout.CENTER);
 
         // Clavier virtuel
         clavierPanel = new JPanel();
-        clavierPanel.setLayout(new GridLayout(0, 10));
-        for (int j = 0; j < clavierAZERTY.length; j++) {
-            JButton bouton = new JButton(Character.toString(clavierAZERTY[j]));
+        clavierPanel.setLayout(new GridLayout(3, 10));
+        for (char c : clavierAZERTY) {
+            JButton bouton = new JButton(Character.toString(c));
             bouton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                        char lettre = e.getActionCommand().toLowerCase().charAt(0);
-                        boolean correct = verifierLettre(lettre);
-            
-                        // Change la couleur du bouton en fonction de la réponse
-                        if (correct) {
-                            bouton.setBackground(Color.GREEN);  // deviner correctement
-                        } else {
-                            bouton.setBackground(Color.RED);  // pas deviner correctement
-                        }
-                        bouton.setEnabled(false);  // desactive le bouton après que l'on s'en soit servi
+                    char lettre = e.getActionCommand().toLowerCase().charAt(0);
+                    boolean correct = verifierLettre(lettre);
+
+                    // Change la couleur du bouton en fonction de la réponse
+                    if (correct) {
+                        bouton.setBackground(Color.GREEN);
+                    } else {
+                        bouton.setBackground(Color.RED);
+                    }
+                    bouton.setEnabled(false);
                 }
             });
             clavierPanel.add(bouton);
@@ -73,7 +77,9 @@ public class PenduGraphique extends JFrame {
 
         if (!trouve) {
             erreurs++;
-            dessinPenduLabel.setText("Erreurs : " + erreurs);
+            if (erreurs < etapesPendu.length) {
+                dessinPenduLabel.setIcon(etapesPendu[erreurs]);
+            }
         }
 
         motLabel.setText(String.valueOf(motCache));
@@ -81,7 +87,7 @@ public class PenduGraphique extends JFrame {
         if (String.valueOf(motCache).equals(mot)) {
             int choix = JOptionPane.showOptionDialog(
                 this,
-                "Félicitations ! Vous avez gagné !",
+                "Félicitations ! Vous avez gagné !",
                 " ",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.PLAIN_MESSAGE,
@@ -89,14 +95,13 @@ public class PenduGraphique extends JFrame {
                 new Object[]{"Rejouer", "Accueil"},
                 "Rejouer"
             );
-        
+
             if (choix == 0) {
-                // Code pour redémarrer le jeu
                 redemarrerJeu();
             } else {
-                System.exit(0); // Ligne de code à changer, doit renvoyer a l'accueil quand on l'aura construit
+                System.exit(0);
             }
-        } else if (erreurs >= 6) {
+        } else if (erreurs > 6) {
             int choix = JOptionPane.showOptionDialog(
                 this,
                 "Vous avez perdu ! Le mot était : " + mot,
@@ -107,23 +112,15 @@ public class PenduGraphique extends JFrame {
                 new Object[]{"Rejouer", "Accueil"},
                 "Rejouer"
             );
-        
+
             if (choix == 0) {
-                // Code pour redémarrer le jeu
                 redemarrerJeu();
             } else {
-                System.exit(0); // Ligne de code à changer, doit renvoyer a l'accueil quand on l'aura construit
+                System.exit(0);
             }
         }
-        
-        return trouve;
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            PenduGraphique jeu = new PenduGraphique();
-            jeu.setVisible(true);
-        });
+        return trouve;
     }
 
     private void redemarrerJeu() {
@@ -132,16 +129,24 @@ public class PenduGraphique extends JFrame {
         motCache = new char[mot.length()];
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
         motLabel.setText(String.valueOf(motCache));
-        dessinPenduLabel.setText("");
-
-        //remet le clavier par default
+        dessinPenduLabel.setIcon(etapesPendu[0]);
+    
         for (Component c : clavierPanel.getComponents()) {
             if (c instanceof JButton) {
                 JButton bouton = (JButton) c;
-                bouton.setEnabled(true);
-                bouton.setBackground(null);
+                bouton.setEnabled(true); // Ensure the button is re-enabled
+                bouton.setBackground(null); // Reset the background color
             }
         }
     }
     
+
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            PenduGraphique jeu = new PenduGraphique();
+            jeu.setVisible(true);
+        });
+    }
 }

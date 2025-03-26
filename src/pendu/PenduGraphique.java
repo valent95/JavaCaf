@@ -18,7 +18,7 @@ public class PenduGraphique extends JFrame {
 
     public PenduGraphique() {
         setTitle("Jeu du Pendu");
-        setSize(1200, 800);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -39,7 +39,7 @@ public class PenduGraphique extends JFrame {
 
         // Clavier virtuel
         clavierPanel = new JPanel();
-        clavierPanel.setLayout(new GridLayout(3, 10));
+        clavierPanel.setLayout(new GridLayout(0, 10));
         for (int j = 0; j < clavierAZERTY.length; j++) {
             JButton bouton = new JButton(Character.toString(clavierAZERTY[j]));
             bouton.addActionListener(new ActionListener() {

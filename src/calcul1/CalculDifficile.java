@@ -27,6 +27,37 @@ public class CalculDifficile {
         SwingUtilities.invokeLater(() -> new CalculDifficile());
     }
 
+    private void checkAnswer() {
+        try {
+            int userAnswer = Integer.parseInt(answerField.getText().trim());
+            if (userAnswer == correctAnswer) {
+                score++;
+                JOptionPane.showMessageDialog(frame, "Correct!", "Result", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Incorrect! The correct answer was: " + correctAnswer, "Result", JOptionPane.ERROR_MESSAGE);
+            }
+            questionsAttempted++;
+            updateScoreLabel();
+            generateQuestion();
+            answerField.setText("");
+            solutionShown = false;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(frame, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void updateScoreLabel() {
+        int percentage = (int) ((double) score / questionsAttempted * 100);
+        scoreLabel.setText("Score: " + score + "/" + questionsAttempted + " (" + percentage + "%)");
+    }
+
+    private void showSolution() {
+        if (!solutionShown) {
+            JOptionPane.showMessageDialog(frame, "La solution est : " + correctAnswer, "Solution", JOptionPane.INFORMATION_MESSAGE);
+            solutionShown = true;
+        }
+    }
+
     public CalculDifficile() {
         configureFrame();
         initUI();
@@ -137,5 +168,13 @@ public class CalculDifficile {
         return button;
     }
 
-    // ... (Les méthodes generateQuestion, checkAnswer, showSolution et updateScore restent identiques)
+    private void generateQuestion() {
+        Random random = new Random();
+        int num1 = random.nextInt(20) + 1; // Random number between 1 and 20
+        int num2 = random.nextInt(20) + 1; // Random number between 1 and 20
+        correctAnswer = num1 * num2;
+        questionLabel.setText(num1 + " * " + num2 + " = ?");
+    }
+
+    
 }

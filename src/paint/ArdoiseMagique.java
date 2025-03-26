@@ -48,11 +48,21 @@ public class ArdoiseMagique extends JFrame {
         toolbar.add(boutonRouge);
         
         JButton boutonVert = new JButton("Vert");
-        boutonVert.addActionListener(e -> couleurActuelle = Color.GREEN);
+        boutonVert.addActionListener(e ->{ 
+            couleurActuelle = Color.GREEN;
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }
+        });
         toolbar.add(boutonVert);
         
         JButton boutonBleu = new JButton("Bleu");
-        boutonBleu.addActionListener(e -> couleurActuelle = Color.BLUE);
+        boutonBleu.addActionListener(e ->{ 
+            couleurActuelle = Color.BLUE;
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }
+        });
         toolbar.add(boutonBleu);
         
         // Ajouter un bouton pour ouvrir une palette de couleurs complète (niveau difficile)
@@ -60,12 +70,19 @@ public class ArdoiseMagique extends JFrame {
         boutonPalette.addActionListener(e -> {
             // Ouvre un JColorChooser pour permettre à l'utilisateur de choisir n'importe quelle couleur
             couleurActuelle = JColorChooser.showDialog(this, "Choisir une couleur", couleurActuelle);
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }
         });
         toolbar.add(boutonPalette);
         
         // Bouton pour effacer
         JButton boutonEffacer = new JButton("Effacer");
-        boutonEffacer.addActionListener(e -> areaDessin.clear());
+        boutonEffacer.addActionListener(e ->{ 
+            areaDessin.clear();
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }});
         toolbar.add(boutonEffacer);
         
         // Gomme

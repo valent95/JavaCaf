@@ -1,4 +1,4 @@
-package calcul1;
+//package calcul1;
 
 import javax.swing.*;
 import java.awt.*;

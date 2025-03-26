@@ -17,7 +17,7 @@ public class PenduGraphique extends JFrame {
 
     public PenduGraphique() {
         setTitle("Jeu du Pendu");
-        setSize(1200, 800);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 

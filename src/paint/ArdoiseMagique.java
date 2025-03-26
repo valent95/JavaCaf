@@ -1,5 +1,4 @@
-
-package paint;
+//package paint;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
@@ -8,7 +7,7 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+// Removed incorrect import
 
 /**
  *
@@ -23,7 +22,7 @@ public class ArdoiseMagique extends JFrame {
     public ArdoiseMagique() {
         setTitle("Ardoise Magique");
         setSize(600, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
         // Panel principal

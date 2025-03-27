@@ -1,9 +1,7 @@
-//package calcul1;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+import javax.swing.*;
 
 public class CalculDifficile {
     private JFrame frame;
@@ -15,153 +13,104 @@ public class CalculDifficile {
     private int questionsAttempted = 0;
     private boolean solutionShown = false;
 
-    // Palette de couleurs plus "sérieuse"
-    private final Color MAIN_BG = new Color(240, 240, 250);  // Bleu très très clair
-    private final Color TITLE_COLOR = new Color(150, 50, 50);  // Rouge bordeaux
-    private final Color SCORE_COLOR = new Color(170, 70, 70);
-    private final Color BUTTON_BG1 = new Color(70, 130, 180);  // Bleu acier
-    private final Color BUTTON_BG2 = new Color(200, 80, 80);  // Rouge doux
-    private final Color TEXT_COLOR = new Color(60, 60, 60);  // Gris très foncé
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new CalculDifficile());
     }
 
-    private void checkAnswer() {
-        try {
-            int userAnswer = Integer.parseInt(answerField.getText().trim());
-            if (userAnswer == correctAnswer) {
-                score++;
-                JOptionPane.showMessageDialog(frame, "Correct!", "Result", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Incorrect! The correct answer was: " + correctAnswer, "Result", JOptionPane.ERROR_MESSAGE);
-            }
-            questionsAttempted++;
-            updateScoreLabel();
-            generateQuestion();
-            answerField.setText("");
-            solutionShown = false;
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(frame, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void updateScoreLabel() {
-        int percentage = (int) ((double) score / questionsAttempted * 100);
-        scoreLabel.setText("Score: " + score + "/" + questionsAttempted + " (" + percentage + "%)");
-    }
-
-    private void showSolution() {
-        if (!solutionShown) {
-            JOptionPane.showMessageDialog(frame, "La solution est : " + correctAnswer, "Solution", JOptionPane.INFORMATION_MESSAGE);
-            solutionShown = true;
-        }
-    }
-
     public CalculDifficile() {
-        configureFrame();
-        initUI();
+        initializeUI();
         generateQuestion();
         frame.setVisible(true);
     }
 
-    private void configureFrame() {
-        frame = new JFrame("Calcul Niveau Difficile - Version Expert");
+    private void initializeUI() {
+        frame = new JFrame("Calcul Niveau Difficile");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setBackground(MAIN_BG);
-    }
+        frame.getContentPane().setBackground(Color.WHITE);
 
-    private void initUI() {
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        mainPanel.setBackground(MAIN_BG);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(20, 20, 20, 20);
+        // Titre
+        JLabel titleLabel = new JLabel("CALCUL DIFFICILE");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 48));
+        titleLabel.setForeground(Color.BLACK);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(titleLabel);
 
-        // Titre avec effet métal
-        JLabel titleLabel = new JLabel("CALCUL DIFFICILE", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 52));
-        titleLabel.setForeground(TITLE_COLOR);
-        titleLabel.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 2));
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
-        mainPanel.add(titleLabel, gbc);
-
-        // Score avec style "badge"
-        scoreLabel = new JLabel("Score: 0/0 (100%)", SwingConstants.CENTER);
+        // Score
+        scoreLabel = new JLabel("Score: 0/0 (0%)");
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 32));
-        scoreLabel.setForeground(SCORE_COLOR);
-        scoreLabel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(SCORE_COLOR, 2),
-            BorderFactory.createEmptyBorder(10, 30, 10, 30)
-        ));
-        gbc.gridy = 1;
-        mainPanel.add(scoreLabel, gbc);
+        scoreLabel.setForeground(Color.BLACK);
+        scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        mainPanel.add(scoreLabel);
 
-        // Question avec ombre portée
+        // Question
         questionLabel = new JLabel("", SwingConstants.CENTER);
-        questionLabel.setFont(new Font("Arial", Font.BOLD, 48));
-        questionLabel.setForeground(TEXT_COLOR);
-        questionLabel.setBorder(BorderFactory.createEmptyBorder(30, 60, 30, 60));
-        questionLabel.setOpaque(true);
-        questionLabel.setBackground(new Color(255, 255, 255, 220));
-        gbc.gridy = 2;
-        mainPanel.add(questionLabel, gbc);
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 64));
+        questionLabel.setForeground(Color.BLACK);
+        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        mainPanel.add(questionLabel);
 
-        // Champ réponse avec style moderne
-        answerField = new JTextField(12);
-        answerField.setFont(new Font("Arial", Font.PLAIN, 40));
+        // Champ Réponse
+        answerField = new JTextField(10);
+        answerField.setFont(new Font("Arial", Font.PLAIN, 36));
+        answerField.setMaximumSize(new Dimension(300, 70));
+        answerField.setAlignmentX(Component.CENTER_ALIGNMENT);
         answerField.setHorizontalAlignment(JTextField.CENTER);
-        answerField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createMatteBorder(0, 0, 3, 0, TITLE_COLOR),
-            BorderFactory.createEmptyBorder(15, 25, 15, 25)
-        ));
-        gbc.gridy = 3;
-        mainPanel.add(answerField, gbc);
+        answerField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        mainPanel.add(answerField);
 
-        // Boutons avec effet 3D
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 40, 0));
-        buttonPanel.setOpaque(false);
+        // Boutons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.setBackground(Color.WHITE);
         
-        buttonPanel.add(create3DButton("VÉRIFIER", BUTTON_BG1, e -> checkAnswer()));
-        buttonPanel.add(create3DButton("SOLUTION", BUTTON_BG2, e -> showSolution()));
+        JButton checkButton = createButton("VÉRIFIER", new Color(0, 153, 255), 30);
+        checkButton.addActionListener(e -> checkAnswer());
+        
+        JButton solutionButton = createButton("SOLUTION", new Color(255, 102, 0), 30);
+        solutionButton.addActionListener(e -> showSolution());
 
-        gbc.gridy = 4;
-        mainPanel.add(buttonPanel, gbc);
+        JButton newButton = createButton("NOUVEAU", new Color(255, 0, 0), 30);
+        newButton.addActionListener(e -> generateNewQuestion());
 
+        buttonPanel.add(checkButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        buttonPanel.add(solutionButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        buttonPanel.add(newButton);
+
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 60)));
+        mainPanel.add(buttonPanel);
+        
         frame.add(mainPanel);
     }
 
-    private JButton create3DButton(String text, Color baseColor, ActionListener action) {
-        JButton button = new JButton(text) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                
-                // Effet 3D
-                g2.setColor(baseColor.darker());
-                g2.fillRoundRect(2, 2, getWidth(), getHeight(), 25, 25);
-                g2.setColor(baseColor);
-                g2.fillRoundRect(0, 0, getWidth()-2, getHeight()-2, 25, 25);
-                
-                g2.dispose();
-                super.paintComponent(g);
-            }
-        };
-        
-        button.setContentAreaFilled(false);
+    private JButton createButton(String text, Color bgColor, int size) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, size));
+        button.setBackground(bgColor);
         button.setForeground(Color.WHITE);
-        button.setFont(new Font("Arial", Font.BOLD, 28));
-        button.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-        button.addActionListener(action);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createRaisedBevelBorder(),
+            BorderFactory.createEmptyBorder(15, 40, 15, 40)
+        ));
         
         button.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                button.setBorder(BorderFactory.createEmptyBorder(22, 50, 18, 50));
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(bgColor.darker());
+                button.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
-            public void mouseReleased(MouseEvent e) {
-                button.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(bgColor);
             }
         });
         
@@ -169,12 +118,72 @@ public class CalculDifficile {
     }
 
     private void generateQuestion() {
-        Random random = new Random();
-        int num1 = random.nextInt(20) + 1; // Random number between 1 and 20
-        int num2 = random.nextInt(20) + 1; // Random number between 1 and 20
-        correctAnswer = num1 * num2;
-        questionLabel.setText(num1 + " * " + num2 + " = ?");
+        solutionShown = false;
+        Random rand = new Random();
+        int a = rand.nextInt(1000);  // Changer à 1000 pour des nombres à trois chiffres
+        int b = rand.nextInt(1000);  // Changer à 1000 pour des nombres à trois chiffres
+        int operationType = rand.nextInt(3);  // 0 : addition, 1 : soustraction, 2 : multiplication
+
+        if (operationType == 0) {
+            // Addition
+            correctAnswer = a + b;
+            questionLabel.setText(a + " + " + b + " = ?");
+        } else if (operationType == 1) {
+            // Soustraction
+            correctAnswer = a - b;
+            questionLabel.setText(a + " - " + b + " = ?");
+        } else {
+            // Multiplication
+            a = rand.nextInt(10);  // Nombres à 1 chiffre
+            b = rand.nextInt(10);  // Nombres à 1 chiffre
+            correctAnswer = a * b;
+            questionLabel.setText(a + " * " + b + " = ?");
+        }
+
+        answerField.setText("");
+        answerField.requestFocus();
     }
 
-    
+    private void checkAnswer() {
+        if (solutionShown) return;
+        
+        try {
+            int answer = Integer.parseInt(answerField.getText());
+            questionsAttempted++;
+            
+            if (answer == correctAnswer) {
+                score++;
+                JOptionPane.showMessageDialog(frame, "Bravo ! Bonne réponse", "Résultat", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Incorrect. La bonne réponse était " + correctAnswer, "Résultat", JOptionPane.WARNING_MESSAGE);
+            }
+            updateScore();
+            generateQuestion();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(frame, "Veuillez entrer un nombre valide", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void showSolution() {
+        if (!solutionShown) {
+            questionsAttempted++;
+            solutionShown = true;
+            JOptionPane.showMessageDialog(frame, "Solution : " + correctAnswer, "Solution", JOptionPane.INFORMATION_MESSAGE);
+            updateScore();
+            generateQuestion();
+        }
+    }
+
+    private void generateNewQuestion() {
+        solutionShown = false;
+        questionsAttempted++; // Une nouvelle question est tentée (perte d'un point)
+        updateScore();
+        generateQuestion();
+    }
+
+    private void updateScore() {
+        scoreLabel.setText(String.format("Score: %d/%d (%.0f%%)", 
+            score, questionsAttempted, 
+            questionsAttempted > 0 ? (100.0 * score / questionsAttempted) : 0));
+    }
 }

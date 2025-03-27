@@ -1,5 +1,3 @@
-//package calcul1;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
@@ -79,10 +77,15 @@ public class CalculFacile {
         
         JButton solutionButton = createButton("SOLUTION", new Color(255, 102, 0), 30);
         solutionButton.addActionListener(e -> showSolution());
-        
+
+        JButton newButton = createButton("NOUVEAU", new Color(255, 0, 0), 30);
+        newButton.addActionListener(e -> generateNewQuestion());
+
         buttonPanel.add(checkButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(40, 0)));
         buttonPanel.add(solutionButton);
+        buttonPanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        buttonPanel.add(newButton);
 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 60)));
         mainPanel.add(buttonPanel);
@@ -162,9 +165,17 @@ public class CalculFacile {
         }
     }
 
+    private void generateNewQuestion() {
+        solutionShown = false;
+        questionsAttempted++; // Une nouvelle question est tentée (perte d'un point)
+        updateScore();
+        generateQuestion();
+    }
+
     private void updateScore() {
         scoreLabel.setText(String.format("Score: %d/%d (%.0f%%)", 
             score, questionsAttempted, 
             questionsAttempted > 0 ? (100.0 * score / questionsAttempted) : 0));
     }
 }
+

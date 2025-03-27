@@ -18,7 +18,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class ArdoiseMagique extends JFrame {
     private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
     private Point debut = null;
-    private float format = 1.0f;
+    private float format = 2.0f;
 
     public ArdoiseMagique() {
         setTitle("Ardoise Magique");
@@ -66,15 +66,18 @@ public class ArdoiseMagique extends JFrame {
         });
         toolbar.add(boutonBleu);
         
-        
-        JButton boutonEpaisseur = new JButton("Format");
-        boutonEpaisseur.addActionListener(e ->{ 
-            format = 5.0f;
-            if (areaDessin.getGommeActive()){
-                areaDessin.setGommeActive(false);
-            }
-        });
-        toolbar.add(boutonEpaisseur);
+        float[] epaisseurs = {2.0f, 4.0f, 6.0f, 8.0f, 10.0f};
+        for (float epaisseur : epaisseurs) {
+            JButton boutonEpaisseur = new JButton("Crayon" + (int) epaisseur);
+            boutonEpaisseur.addActionListener(e ->{ 
+                format = epaisseur;
+                if (areaDessin.getGommeActive()){
+                    areaDessin.setGommeActive(false);
+                }
+            });
+            toolbar.add(boutonEpaisseur);
+        }
+
         
         // Ajouter un bouton pour ouvrir une palette de couleurs complète (niveau difficile)
         JButton boutonPalette = new JButton("Palette Complète");

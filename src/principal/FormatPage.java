@@ -1,21 +1,13 @@
-//package principal;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class FormatPage extends JFrame {
-    public FormatPage(){
-
-        setTitle("Page d'acceuil");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+public class FormatPage extends JPanel { // Change JFrame à JPanel
+    public FormatPage() {
         setLayout(new BorderLayout());
+        setBackground(Color.WHITE); // Exemple de couleur de fond
 
-    }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FormatPage acceuil = new FormatPage();
-            acceuil.setVisible(true);
-        });
+        JLabel label = new JLabel("Page d'accueil", SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 24));
+        add(label, BorderLayout.CENTER);
     }
 }

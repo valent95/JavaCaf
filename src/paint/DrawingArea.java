@@ -35,7 +35,9 @@ public class DrawingArea extends JPanel {
                     Graphics g = getGraphics();
                     if (gommeActive) {
                         g.setColor(Color.WHITE);  // Gomme = fond blanc
-                        g.fillRect(e.getX() - 5, e.getY() - 5, 10, 10);
+                        Graphics2D g2 = (Graphics2D) g; 
+                        g2.setStroke(new BasicStroke(ardoise.getFormat()*2));
+                        g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     } else {
                         // Utilisez la couleur de l'ardoise
                         g.setColor(ardoise.getCouleurActuelle());

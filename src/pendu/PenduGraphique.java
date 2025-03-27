@@ -35,6 +35,7 @@ public class PenduGraphique extends JFrame {
         // Afficher le mot caché
         motLabel = new JLabel(String.valueOf(motCache), SwingConstants.CENTER);
         motLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        motLabel.setText(formatMotAffiche());
         add(motLabel, BorderLayout.NORTH);
 
         // Section dessin du pendu
@@ -140,9 +141,15 @@ public class PenduGraphique extends JFrame {
         }
     }
     
-
-
-
+    //format d'affichage du mot à deviner _ _ _ _ _ _
+    private String formatMotAffiche(){
+        StringBuilder sb = new StringBuilder();
+        for (char c : motCache){
+            sb.append(c).append(" ");
+        }
+        return sb.toString().trim();
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PenduGraphique jeu = new PenduGraphique();

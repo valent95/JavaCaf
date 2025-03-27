@@ -10,6 +10,7 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class DrawingArea extends JPanel {
+    @SuppressWarnings("unused")
     private final ArdoiseMagique ardoise;  // Référence à la fenêtre principale
     private Point debut = null;
     private boolean gommeActive = false;

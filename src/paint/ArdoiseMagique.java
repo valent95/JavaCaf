@@ -17,11 +17,12 @@ import javax.swing.SwingUtilities;
 
 public class ArdoiseMagique extends JFrame {
     private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
+    @SuppressWarnings("unused")
     private Point debut = null;
     
     public ArdoiseMagique() {
         setTitle("Ardoise Magique");
-        setSize(600, 400);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         

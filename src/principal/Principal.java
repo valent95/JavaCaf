@@ -1,6 +1,6 @@
 public class Principal {
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        MainFrame page = new MainFrame("bite", 35);
+        MainFrame page = new MainFrame("jeu java", 35);
     }
 }

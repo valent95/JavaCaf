@@ -5,36 +5,104 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BarMenu extends JMenuBar {
+    private String difficulty = null;
+    private String game = null;
     public BarMenu(Font font) {
-        // Exemple de menu "Fichier"
-        JMenu fileMenu = new JMenu("Fichier");
-        fileMenu.setFont(font);
+        JMenuBar barMenu = new JMenuBar();
+        barMenu.setFont(font);
 
-        // Exemple d'éléments de menu
-        JMenuItem openItem = new JMenuItem("Ouvrir");
-        openItem.setFont(font);
-        openItem.addActionListener(new ActionListener() {
+        // menu déroulant des difficultés
+        JMenu difficultyMenu = new JMenu("Difficulté");
+
+        JRadioButtonMenuItem easyItem = new JRadioButtonMenuItem("Facile");
+        JRadioButtonMenuItem hardItem = new JRadioButtonMenuItem("Difficile");
+
+        ButtonGroup difficultyGroup = new ButtonGroup();
+        difficultyGroup.add(easyItem);
+        difficultyGroup.add(hardItem);
+
+        difficultyMenu.add(easyItem);
+        difficultyMenu.add(hardItem);
+
+        barMenu.add(difficultyMenu);
+
+        easyItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Ouvrir sélectionné !");
+                difficulty = "easy";
             }
         });
 
-        JMenuItem exitItem = new JMenuItem("Quitter");
-        exitItem.setFont(font);
-        exitItem.addActionListener(new ActionListener() {
+        hardItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                difficulty = "hard";
             }
         });
 
         // Ajouter les éléments au menu
-        fileMenu.add(openItem);
-        fileMenu.addSeparator();
-        fileMenu.add(exitItem);
+        difficultyMenu.add(easyItem);
+        difficultyMenu.addSeparator();
+        difficultyMenu.add(hardItem);
 
         // Ajouter le menu à la barre de menu
-        this.add(fileMenu);
+        this.add(difficultyMenu);
+
+        // menu déroulant des jeux
+        JMenu gameMenu = new JMenu("Jeu");
+
+        JRadioButtonMenuItem penduGame = new JRadioButtonMenuItem("Pendu");
+        JRadioButtonMenuItem drawingGame = new JRadioButtonMenuItem("Dessin");
+        JRadioButtonMenuItem calculGame = new JRadioButtonMenuItem("Calcul");
+
+        ButtonGroup gameGroup = new ButtonGroup();
+        gameGroup.add(penduGame);
+        gameGroup.add(drawingGame);
+        gameGroup.add(calculGame);
+
+        gameMenu.add(penduGame);
+        gameMenu.add(drawingGame);
+        gameMenu.add(calculGame);
+
+        barMenu.add(gameMenu);
+
+        penduGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game = "pendu";
+            }
+        });
+
+        drawingGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                difficulty = "drawing";
+            }
+        });
+
+        calculGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                difficulty = "calcul";
+            }
+        });
+
+        // Ajouter les éléments au menu
+        gameMenu.add(penduGame);
+        gameMenu.addSeparator();
+        gameMenu.add(drawingGame);
+        gameMenu.addSeparator();
+        gameMenu.add(calculGame);
+
+        // Ajouter le menu à la barre de menu
+        this.add(gameMenu);
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public String getGame() {
+        return game;
     }
 }

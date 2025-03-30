@@ -14,6 +14,7 @@ public class PenduGraphique extends JFrame {
     private String[] dictionnaire = {"java", "programmation", "ordinateur", "pendu"};
     private char[] clavierAZERTY = {'a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'};
     private ImageIcon[] etapesPendu;
+    private boolean redemarrer = false; // Variable pour indiquer si le jeu doit redémarrer
 
     public PenduGraphique() {
         setTitle("Jeu du Pendu");
@@ -60,6 +61,10 @@ public class PenduGraphique extends JFrame {
                         bouton.setBackground(Color.RED);
                     }
                     bouton.setEnabled(false);
+
+                    if (redemarrer) {
+                        redemarrerJeu(); // Appelle redemarrerJeu après le retour de trouve
+                    }
                 }
             });
             clavierPanel.add(bouton);
@@ -69,6 +74,7 @@ public class PenduGraphique extends JFrame {
 
     private boolean verifierLettre(char lettre) {
         boolean trouve = false;
+
         for (int i = 0; i < mot.length(); i++) {
             if (mot.charAt(i) == lettre) {
                 motCache[i] = lettre;
@@ -98,7 +104,7 @@ public class PenduGraphique extends JFrame {
             );
 
             if (choix == 0) {
-                redemarrerJeu();
+                redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
                 System.exit(0);
             }
@@ -115,7 +121,7 @@ public class PenduGraphique extends JFrame {
             );
 
             if (choix == 0) {
-                redemarrerJeu();
+                redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
                 System.exit(0);
             }
@@ -131,7 +137,7 @@ public class PenduGraphique extends JFrame {
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
         motLabel.setText(String.valueOf(motCache));
         dessinPenduLabel.setIcon(etapesPendu[0]);
-    
+        motLabel.setText(formatMotAffiche());
         for (Component c : clavierPanel.getComponents()) {
             if (c instanceof JButton) {
                 JButton bouton = (JButton) c;

@@ -76,14 +76,23 @@ public class BarMenu extends JMenuBar {
         drawingGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                difficulty = "drawing";
+                if (difficulty == null){
+
+                }else{
+                    if (difficulty == "easy"){
+
+                    } else{
+
+                    }
+                }
+                game = "drawing";
             }
         });
 
         calculGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                difficulty = "calcul";
+                game = "calcul";
             }
         });
 

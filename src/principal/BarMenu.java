@@ -1,4 +1,8 @@
 import javax.swing.*;
+//import pendu.PenduGraphique;
+//import paint.ArdoiseMagique;
+//import calcul1.CalculFacile;
+//import calcul1.CalculDifficile;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -70,6 +74,7 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game = "pendu";
+                SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
             }
         });
 
@@ -80,18 +85,28 @@ public class BarMenu extends JMenuBar {
 
                 }else{
                     if (difficulty == "easy"){
-
+                        SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
                     } else{
-
+                        SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
                     }
                 }
                 game = "drawing";
+                
             }
         });
 
         calculGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (difficulty == null) {
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une difficulté.", "Erreur", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    if (difficulty.equals("easy")) {
+                        SwingUtilities.invokeLater(() -> new CalculFacile());
+                    } else {
+                        SwingUtilities.invokeLater(() -> new CalculDifficile());
+                    }
+                }
                 game = "calcul";
             }
         });

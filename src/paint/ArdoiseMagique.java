@@ -23,7 +23,6 @@ public class ArdoiseMagique extends JFrame {
     public ArdoiseMagique() {
         setTitle("Ardoise Magique");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
         // Panel principal

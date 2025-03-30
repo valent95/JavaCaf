@@ -26,7 +26,6 @@ public class CalculDifficile {
     private void initializeUI() {
         frame = new JFrame("Calcul Niveau Difficile");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.WHITE);
 
         JPanel mainPanel = new JPanel();

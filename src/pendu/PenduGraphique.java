@@ -19,7 +19,6 @@ public class PenduGraphique extends JFrame {
     public PenduGraphique() {
         setTitle("Jeu du Pendu");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         // Charger les images pour les étapes du pendu

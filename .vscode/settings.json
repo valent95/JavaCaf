@@ -1,9 +1,9 @@
 {
     "java.project.sourcePaths": [
+        "src/principal",
         "src/pendu",
         "src/paint",
-        "src/calcul1",
-        "src/principal"
+        "src/calcul1"
     ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [

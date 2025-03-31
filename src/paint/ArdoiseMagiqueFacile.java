@@ -1,28 +1,21 @@
 package paint;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-/**
- *
- * @author joris
- */
-
-
-public class ArdoiseMagique extends JFrame {
-    private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
+public class ArdoiseMagiqueFacile extends ArdoiseMagique {
+private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
     private Point debut = null;
     private float format = 2.0f;
 
-    public ArdoiseMagique() {
+    public ArdoiseMagiqueFacile() {
         setTitle("Ardoise Magique");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -62,6 +55,9 @@ public class ArdoiseMagique extends JFrame {
         JButton boutonBleu = new JButton("Bleu");
         boutonBleu.addActionListener(e ->{ 
             couleurActuelle = Color.BLUE;
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }
         });
         toolbar.add(boutonBleu);
         
@@ -74,33 +70,16 @@ public class ArdoiseMagique extends JFrame {
         for (float epaisseur : epaisseurs) {
             JMenuItem choix = new JMenuItem("Crayon" + (int) epaisseur);
             choix.addActionListener(e ->{ 
-                format = epaisseur;
+                format = epaisseur;   
             });
             menu.add(choix);
         }
 
         boutonFormat.addActionListener(e -> menu.show(boutonFormat, 0, boutonFormat.getHeight()));
         toolbar.add(boutonFormat);
-
-
-        // Ajouter un bouton pour ouvrir une palette de couleurs complète (niveau difficile)
-        JButton boutonPalette = new JButton("Palette Complète");
-        boutonPalette.addActionListener(e -> {
-            // Ouvre un JColorChooser pour permettre à l'utilisateur de choisir n'importe quelle couleur
-            couleurActuelle = JColorChooser.showDialog(this, "Choisir une couleur", couleurActuelle);
-            if (areaDessin.getGommeActive()){
-                areaDessin.setGommeActive(false);
-            }
-        });
-        toolbar.add(boutonPalette);
-        
-        // Bouton pour effacer
         JButton boutonEffacer = new JButton("Effacer");
         boutonEffacer.addActionListener(e ->{ 
-            areaDessin.clear();
-            if (areaDessin.getGommeActive()){
-                areaDessin.setGommeActive(false);
-            }});
+            areaDessin.clear();});
         toolbar.add(boutonEffacer);
         
         // Gomme
@@ -120,7 +99,8 @@ public class ArdoiseMagique extends JFrame {
     }
     
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ArdoiseMagique());
+        SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile());
     }
 
 }
+    

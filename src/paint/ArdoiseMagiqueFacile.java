@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-public class ArdoiseMagiqueFacile extends ArdoiseMagique {
+public class ArdoiseMagiqueFacile extends JFrame {
 private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
     private Point debut = null;
     private float format = 2.0f;

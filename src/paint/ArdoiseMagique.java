@@ -1,6 +1,7 @@
 package paint;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -42,6 +43,7 @@ public class ArdoiseMagique extends JFrame {
         
         // Boutons de couleur (niveau facile)
         JButton boutonRouge = new JButton("Rouge");
+        boutonRouge.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonRouge.addActionListener(e ->{ 
             couleurActuelle = Color.RED;
             if (areaDessin.getGommeActive()){
@@ -51,6 +53,7 @@ public class ArdoiseMagique extends JFrame {
         toolbar.add(boutonRouge);
         
         JButton boutonVert = new JButton("Vert");
+        boutonVert.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonVert.addActionListener(e ->{ 
             couleurActuelle = Color.GREEN;
             if (areaDessin.getGommeActive()){
@@ -60,12 +63,14 @@ public class ArdoiseMagique extends JFrame {
         toolbar.add(boutonVert);
         
         JButton boutonBleu = new JButton("Bleu");
+        boutonBleu.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonBleu.addActionListener(e ->{ 
             couleurActuelle = Color.BLUE;
         });
         toolbar.add(boutonBleu);
         
         JButton boutonFormat = new JButton("Taille");
+        boutonFormat.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         toolbar.add(boutonFormat);
         
         JPopupMenu menu = new JPopupMenu();
@@ -85,6 +90,7 @@ public class ArdoiseMagique extends JFrame {
 
         // Ajouter un bouton pour ouvrir une palette de couleurs complète (niveau difficile)
         JButton boutonPalette = new JButton("Palette Complète");
+        boutonPalette.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonPalette.addActionListener(e -> {
             // Ouvre un JColorChooser pour permettre à l'utilisateur de choisir n'importe quelle couleur
             couleurActuelle = JColorChooser.showDialog(this, "Choisir une couleur", couleurActuelle);
@@ -96,6 +102,7 @@ public class ArdoiseMagique extends JFrame {
         
         // Bouton pour effacer
         JButton boutonEffacer = new JButton("Effacer");
+        boutonEffacer.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonEffacer.addActionListener(e ->{ 
             areaDessin.clear();
             if (areaDessin.getGommeActive()){
@@ -105,6 +112,7 @@ public class ArdoiseMagique extends JFrame {
         
         // Gomme
         JButton boutonGomme = new JButton("Gomme");
+        boutonGomme.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
         boutonGomme.addActionListener(e -> areaDessin.activerGomme());
         toolbar.add(boutonGomme);
         

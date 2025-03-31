@@ -82,7 +82,7 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (difficulty == null){
-                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une difficulté.", "Erreur", JOptionPane.WARNING_MESSAGE);
+
                 }else{
                     if (difficulty == "easy"){
                         SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));

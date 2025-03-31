@@ -88,7 +88,7 @@ public class PenduGraphique extends JFrame {
             }
         }
 
-        motLabel.setText(formatMotAffiche()); // Utiliser formatMotAffiche pour conserver la mise en forme
+        motLabel.setText(String.valueOf(motCache));
 
         if (String.valueOf(motCache).equals(mot)) {
             int choix = JOptionPane.showOptionDialog(
@@ -105,7 +105,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose(); // Ferme uniquement la fenêtre actuelle
+                System.exit(0);
             }
         } else if (erreurs > 6) {
             int choix = JOptionPane.showOptionDialog(
@@ -122,7 +122,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose(); // Ferme uniquement la fenêtre actuelle
+                System.exit(0);
             }
         }
 
@@ -144,7 +144,6 @@ public class PenduGraphique extends JFrame {
                 bouton.setBackground(null); // Reset the background color
             }
         }
-        redemarrer = false; // Réinitialiser la variable après redémarrage
     }
     
     //format d'affichage du mot à deviner _ _ _ _ _ _

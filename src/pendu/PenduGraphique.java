@@ -89,7 +89,6 @@ public class PenduGraphique extends JFrame {
         }
 
         motLabel.setText(formatMotAffiche()); // Utiliser formatMotAffiche pour conserver la mise en forme
-
         if (String.valueOf(motCache).equals(mot)) {
             int choix = JOptionPane.showOptionDialog(
                 this,
@@ -105,7 +104,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose(); // Ferme uniquement la fenêtre actuelle
+                dispose();
             }
         } else if (erreurs > 6) {
             int choix = JOptionPane.showOptionDialog(
@@ -122,7 +121,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose(); // Ferme uniquement la fenêtre actuelle
+                dispose();
             }
         }
 
@@ -134,9 +133,8 @@ public class PenduGraphique extends JFrame {
         mot = dictionnaire[new Random().nextInt(dictionnaire.length)];
         motCache = new char[mot.length()];
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
-        motLabel.setText(String.valueOf(motCache));
-        dessinPenduLabel.setIcon(etapesPendu[0]);
         motLabel.setText(formatMotAffiche());
+        dessinPenduLabel.setIcon(etapesPendu[0]);
         for (Component c : clavierPanel.getComponents()) {
             if (c instanceof JButton) {
                 JButton bouton = (JButton) c;

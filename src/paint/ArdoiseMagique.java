@@ -1,4 +1,4 @@
-package paint;
+//package paint;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -18,8 +18,10 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 
 
+@SuppressWarnings("unused")
 public class ArdoiseMagique extends JFrame {
     private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
+    @SuppressWarnings("FieldMayBeFinal")
     private Point debut = null;
     private float format = 2.0f;
 
@@ -77,7 +79,7 @@ public class ArdoiseMagique extends JFrame {
         float[] epaisseurs = {2.0f, 4.0f, 6.0f, 8.0f, 10.0f};
         
         for (float epaisseur : epaisseurs) {
-            JMenuItem choix = new JMenuItem("Crayon" + (int) epaisseur);
+            JMenuItem choix = new JMenuItem("Crayon" + (int)(epaisseur/2));
             choix.addActionListener(e ->{ 
                 format = epaisseur;
             });

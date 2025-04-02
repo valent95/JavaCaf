@@ -1,4 +1,4 @@
-package paint;
+//package paint;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -13,7 +13,9 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class DrawingArea extends JPanel {
+    @SuppressWarnings("unused")
     private  ArdoiseMagique ardoise;  // Référence à la fenêtre principale
+    @SuppressWarnings("unused")
     private  ArdoiseMagiqueFacile ardoiseFacile;
     private Point debut = null;
     private boolean gommeActive = false;
@@ -25,12 +27,14 @@ public class DrawingArea extends JPanel {
         setPreferredSize(new Dimension(600, 300));
         
         addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 debut = e.getPoint();
             }
         });
         
         addMouseMotionListener(new MouseAdapter() {
+            @SuppressWarnings("override")
             public void mouseDragged(MouseEvent e) {
                 if (debut != null) {
                     Graphics g = getGraphics();
@@ -60,12 +64,14 @@ public class DrawingArea extends JPanel {
         setPreferredSize(new Dimension(600, 300));
         
         addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 debut = e.getPoint();
             }
         });
         
         addMouseMotionListener(new MouseAdapter() {
+            @Override
             public void mouseDragged(MouseEvent e) {
                 if (debut != null) {
                     Graphics g = getGraphics();

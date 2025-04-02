@@ -87,8 +87,6 @@ public class DrawingArea extends JPanel {
         });
     }
   
-  
-  
     public void clear() {
         historiqueImages.clear();
         repaint();
@@ -105,4 +103,5 @@ public class DrawingArea extends JPanel {
     this.gommeActive = etat;
 }
 }
+
 

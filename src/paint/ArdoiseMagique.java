@@ -6,9 +6,8 @@ import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
+import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -69,23 +68,17 @@ public class ArdoiseMagique extends JFrame {
         });
         toolbar.add(boutonBleu);
         
-        JButton boutonFormat = new JButton("Taille");
-        boutonFormat.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
-        toolbar.add(boutonFormat);
-        
-        JPopupMenu menu = new JPopupMenu();
-        float[] epaisseurs = {2.0f, 4.0f, 6.0f, 8.0f, 10.0f};
-        
-        for (float epaisseur : epaisseurs) {
-            JMenuItem choix = new JMenuItem("Crayon" + (int) epaisseur);
-            choix.addActionListener(e ->{ 
-                format = epaisseur;
-            });
-            menu.add(choix);
-        }
+        JSlider sliderEpaisseur = new JSlider(JSlider.HORIZONTAL, 1, 21, 1);
+        sliderEpaisseur.setMajorTickSpacing(5);
+        sliderEpaisseur.setPaintTicks(true);
+        sliderEpaisseur.setPaintLabels(true);
 
-        boutonFormat.addActionListener(e -> menu.show(boutonFormat, 0, boutonFormat.getHeight()));
-        toolbar.add(boutonFormat);
+        sliderEpaisseur.addChangeListener(e -> {
+                format = sliderEpaisseur.getValue();
+            });
+
+toolbar.add(sliderEpaisseur);
+
 
 
         // Ajouter un bouton pour ouvrir une palette de couleurs complète (niveau difficile)

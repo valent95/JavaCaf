@@ -103,4 +103,3 @@ private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
     }
 
 }
-    

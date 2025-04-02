@@ -30,6 +30,13 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 difficulty = "easy";
+                if (game=="pendu"){
+                    SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
+                }else if(game=="drawing"){
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                }else if(game=="calcul"){
+                    SwingUtilities.invokeLater(() -> new CalculFacile());
+                }
             }
         });
 
@@ -37,6 +44,13 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 difficulty = "hard";
+                if (game=="pendu"){
+                    SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
+                }else if(game=="drawing"){
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                }else if(game=="calcul"){
+                    SwingUtilities.invokeLater(() -> new CalculDifficile());
+                }
             }
         });
 

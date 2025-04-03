@@ -72,13 +72,13 @@ public class DrawingArea extends JPanel {
                     if (gommeActive) {
                         g.setColor(Color.WHITE);  // Gomme = fond blanc
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     } else {
                         // Utilisez la couleur de l'ardoise
                         g.setColor(ardoiseFacile.getCouleurActuelle());
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     }
                     debut = e.getPoint();

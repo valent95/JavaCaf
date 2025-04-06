@@ -1,0 +1,10 @@
+vache
+tomate
+fromage
+pizza
+canard
+poisson
+livre
+stylo
+ordinateur
+chat

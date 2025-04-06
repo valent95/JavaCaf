@@ -30,6 +30,13 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 difficulty = "easy";
+                if (game=="pendu"){
+                    SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
+                }else if(game=="drawing"){
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile().setVisible(true));
+                }else if(game=="calcul"){
+                    SwingUtilities.invokeLater(() -> new CalculFacile());
+                }
             }
         });
 
@@ -37,6 +44,13 @@ public class BarMenu extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 difficulty = "hard";
+                if (game=="pendu"){
+                    SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
+                }else if(game=="drawing"){
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                }else if(game=="calcul"){
+                    SwingUtilities.invokeLater(() -> new CalculDifficile());
+                }
             }
         });
 
@@ -81,7 +95,7 @@ public class BarMenu extends JMenuBar {
                     JOptionPane.showMessageDialog(null, "Veuillez sélectionner une difficulté.", "Erreur", JOptionPane.WARNING_MESSAGE);
 
                 }else if (difficulty == "easy"){
-                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile().setVisible(true));
                 } else{
                     SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
                 }
@@ -114,6 +128,30 @@ public class BarMenu extends JMenuBar {
 
         // Ajouter le menu à la barre de menu
         this.add(gameMenu);
+
+         // Ajout du menu Administration
+         JMenu adminMenu = new JMenu("Administration");
+         JMenuItem adminItem = new JMenuItem("Accéder");
+         adminMenu.add(adminItem);
+         this.add(adminMenu);
+ 
+         adminItem.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // Pour obtenir le parent de la barre de menu (la fenêtre principale)
+                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(BarMenu.this);
+                 AdminLoginDialog loginDialog = new AdminLoginDialog(parentFrame);
+                 loginDialog.setVisible(true);
+                 if (loginDialog.isAuthenticated()) {
+                     JFrame adminFrame = new JFrame("Administration");
+                     adminFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                     adminFrame.getContentPane().add(new AdminPanel());
+                     adminFrame.pack();
+                     adminFrame.setLocationRelativeTo(parentFrame);
+                     adminFrame.setVisible(true);
+                 }
+             }
+         });
     }
 
     public String getDifficulty() {

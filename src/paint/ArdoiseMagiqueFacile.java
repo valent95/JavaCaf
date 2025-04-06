@@ -2,107 +2,119 @@
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Point;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
+import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
 public class ArdoiseMagiqueFacile extends JFrame {
-private Color couleurActuelle = Color.RED;  // Couleur de départ (rouge)
-@SuppressWarnings({"FieldMayBeFinal", "unused"})
+    private Color couleurActuelle = Color.RED; // Couleur de départ (rouge)
+    @SuppressWarnings("unused")
     private Point debut = null;
     private float format = 2.0f;
 
-    @SuppressWarnings("unused")
     public ArdoiseMagiqueFacile() {
         setTitle("Ardoise Magique");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+
         // Panel principal
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         add(panelPrincipal);
-        
+
         // Zone de dessin
         DrawingArea areaDessin = new DrawingArea(this);
         panelPrincipal.add(areaDessin, BorderLayout.CENTER);
-        
+
         // Barre d'outils
         JPanel toolbar = new JPanel();
         panelPrincipal.add(toolbar, BorderLayout.NORTH);
-        
+
         // Boutons de couleur (niveau facile)
         JButton boutonRouge = new JButton("Rouge");
-        boutonRouge.addActionListener(e ->{ 
+        boutonRouge.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        boutonRouge.setBackground(Color.RED);
+        boutonRouge.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        boutonRouge.addActionListener(e -> {
             couleurActuelle = Color.RED;
-            if (areaDessin.getGommeActive()){
+            if (areaDessin.getGommeActive()) {
                 areaDessin.setGommeActive(false);
             }
         });
         toolbar.add(boutonRouge);
-        
+
         JButton boutonVert = new JButton("Vert");
-        boutonVert.addActionListener(e ->{ 
+        boutonVert.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        boutonVert.setBackground(Color.GREEN);
+        boutonVert.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        boutonVert.addActionListener(e -> {
             couleurActuelle = Color.GREEN;
-            if (areaDessin.getGommeActive()){
+            if (areaDessin.getGommeActive()) {
                 areaDessin.setGommeActive(false);
             }
         });
         toolbar.add(boutonVert);
-        
+
         JButton boutonBleu = new JButton("Bleu");
-        boutonBleu.addActionListener(e ->{ 
+        boutonBleu.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        boutonBleu.setBackground(Color.BLUE);
+        boutonBleu.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        boutonBleu.addActionListener(e -> {
             couleurActuelle = Color.BLUE;
-            if (areaDessin.getGommeActive()){
+            if (areaDessin.getGommeActive()) {
                 areaDessin.setGommeActive(false);
             }
         });
         toolbar.add(boutonBleu);
-        
-        JButton boutonFormat = new JButton("Taille");
-        toolbar.add(boutonFormat);
-        
-        JPopupMenu menu = new JPopupMenu();
-        float[] epaisseurs = {2.0f, 4.0f, 6.0f, 8.0f, 10.0f};
-        
-        for (float epaisseur : epaisseurs) {
-            JMenuItem choix = new JMenuItem("Crayon" + (int) epaisseur);
-            choix.addActionListener(e ->{ 
-                format = epaisseur;   
-            });
-            menu.add(choix);
-        }
 
-        boutonFormat.addActionListener(e -> menu.show(boutonFormat, 0, boutonFormat.getHeight()));
-        toolbar.add(boutonFormat);
+        JSlider sliderEpaisseur = new JSlider(JSlider.HORIZONTAL, 1, 21, 1);
+        sliderEpaisseur.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        sliderEpaisseur.setMajorTickSpacing(5);
+        sliderEpaisseur.setPaintTicks(true);
+        sliderEpaisseur.setPaintLabels(true);
+
+        sliderEpaisseur.addChangeListener(e -> {
+            format = sliderEpaisseur.getValue();
+        });
+
+        toolbar.add(sliderEpaisseur);
+
         JButton boutonEffacer = new JButton("Effacer");
+        boutonEffacer.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        boutonEffacer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonEffacer.addActionListener(e ->{ 
-            areaDessin.clear();});
+            areaDessin.clear();
+            if (areaDessin.getGommeActive()){
+                areaDessin.setGommeActive(false);
+            }});
         toolbar.add(boutonEffacer);
-        
+       
+       
         // Gomme
         JButton boutonGomme = new JButton("Gomme");
+        boutonGomme.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        boutonGomme.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonGomme.addActionListener(e -> areaDessin.activerGomme());
         toolbar.add(boutonGomme);
-        
+
         setVisible(true);
     }
-     
+
     public float getFormat() {
         return format;
     }
-    
+
     public Color getCouleurActuelle() {
         return couleurActuelle;
     }
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile());
     }
 
 }
-    

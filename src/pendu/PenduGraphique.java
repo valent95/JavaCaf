@@ -3,6 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PenduGraphique extends JFrame {
     private JPanel clavierPanel;
@@ -11,7 +15,7 @@ public class PenduGraphique extends JFrame {
     private String mot;
     private char[] motCache;
     private int erreurs = 0;
-    private String[] dictionnaire = {"java", "programmation", "ordinateur", "pendu"};
+    private ArrayList<String> dictionnaire = new ArrayList<>(); // Remplace le tableau par une liste dynamique
     private char[] clavierAZERTY = {'a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'};
     private ImageIcon[] etapesPendu;
     private boolean redemarrer = false; // Variable pour indiquer si le jeu doit redémarrer
@@ -27,8 +31,17 @@ public class PenduGraphique extends JFrame {
             etapesPendu[i] = new ImageIcon("src/pendu/pendu" + i + ".png");
         }
 
-        // Tirage du mot à deviner
-        mot = dictionnaire[new Random().nextInt(dictionnaire.length)];
+        // Charger les mots depuis le fichier dictionary.txt
+        chargerDictionnaire();
+
+        // Vérifier que le dictionnaire n'est pas vide avant de tirer un mot
+        if (!dictionnaire.isEmpty()) {
+            mot = dictionnaire.get(new Random().nextInt(dictionnaire.size())); // Tirage aléatoire
+        } else {
+            JOptionPane.showMessageDialog(this, "Le fichier dictionary.txt est vide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            System.exit(1); // Quitte l'application si le dictionnaire est vide
+        }
+
         motCache = new char[mot.length()];
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
 
@@ -89,6 +102,7 @@ public class PenduGraphique extends JFrame {
         }
 
         motLabel.setText(formatMotAffiche()); // Utiliser formatMotAffiche pour conserver la mise en forme
+
         if (String.valueOf(motCache).equals(mot)) {
             int choix = JOptionPane.showOptionDialog(
                 this,
@@ -104,7 +118,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose();
+                dispose(); // Ferme uniquement la fenêtre actuelle
             }
         } else if (erreurs > 6) {
             int choix = JOptionPane.showOptionDialog(
@@ -121,7 +135,7 @@ public class PenduGraphique extends JFrame {
             if (choix == 0) {
                 redemarrer = true; // Indique que le jeu doit redémarrer
             } else {
-                dispose();
+                dispose(); // Ferme uniquement la fenêtre actuelle
             }
         }
 
@@ -130,11 +144,12 @@ public class PenduGraphique extends JFrame {
 
     private void redemarrerJeu() {
         erreurs = 0;
-        mot = dictionnaire[new Random().nextInt(dictionnaire.length)];
+        mot = dictionnaire.get(new Random().nextInt(dictionnaire.size()));
         motCache = new char[mot.length()];
         for (int i = 0; i < mot.length(); i++) motCache[i] = '_';
-        motLabel.setText(formatMotAffiche());
+        motLabel.setText(String.valueOf(motCache));
         dessinPenduLabel.setIcon(etapesPendu[0]);
+        motLabel.setText(formatMotAffiche());
         for (Component c : clavierPanel.getComponents()) {
             if (c instanceof JButton) {
                 JButton bouton = (JButton) c;
@@ -154,6 +169,17 @@ public class PenduGraphique extends JFrame {
         return sb.toString().trim();
     }
     
+    private void chargerDictionnaire() {
+        try (Scanner scanner = new Scanner(new File("src/pendu/dictionary.txt"))) {
+            while (scanner.hasNextLine()) {
+                dictionnaire.add(scanner.nextLine().trim());
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Fichier dictionary.txt introuvable.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            System.exit(1); // Quitte l'application si le fichier est introuvable
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PenduGraphique jeu = new PenduGraphique();

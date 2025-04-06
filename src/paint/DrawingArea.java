@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 
 public class DrawingArea extends JPanel {
     @SuppressWarnings("unused")
-    private  ArdoiseMagique ardoise;  // Référence à la fenêtre principale
+    private ArdoiseMagique ardoise;  // Référence à la fenêtre principale
     @SuppressWarnings("unused")
-    private  ArdoiseMagiqueFacile ardoiseFacile;
+    private ArdoiseMagiqueFacile ardoiseFacile;
     private Point debut = null;
     private boolean gommeActive = false;
     private Stack<Image> historiqueImages = new Stack<>();
@@ -27,27 +27,25 @@ public class DrawingArea extends JPanel {
         setPreferredSize(new Dimension(600, 300));
         
         addMouseListener(new MouseAdapter() {
-            @Override
             public void mousePressed(MouseEvent e) {
                 debut = e.getPoint();
             }
         });
         
         addMouseMotionListener(new MouseAdapter() {
-            @SuppressWarnings("override")
             public void mouseDragged(MouseEvent e) {
                 if (debut != null) {
                     Graphics g = getGraphics();
                     if (gommeActive) {
                         g.setColor(Color.WHITE);  // Gomme = fond blanc
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoise.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoise.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     } else {
                         // Utilisez la couleur de l'ardoise
                         g.setColor(ardoise.getCouleurActuelle());
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoise.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoise.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     }
                     debut = e.getPoint();
@@ -64,27 +62,25 @@ public class DrawingArea extends JPanel {
         setPreferredSize(new Dimension(600, 300));
         
         addMouseListener(new MouseAdapter() {
-            @Override
             public void mousePressed(MouseEvent e) {
                 debut = e.getPoint();
             }
         });
         
         addMouseMotionListener(new MouseAdapter() {
-            @Override
             public void mouseDragged(MouseEvent e) {
                 if (debut != null) {
                     Graphics g = getGraphics();
                     if (gommeActive) {
                         g.setColor(Color.WHITE);  // Gomme = fond blanc
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     } else {
                         // Utilisez la couleur de l'ardoise
                         g.setColor(ardoiseFacile.getCouleurActuelle());
                         Graphics2D g2 = (Graphics2D) g; 
-                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat()));
+                        g2.setStroke(new BasicStroke(ardoiseFacile.getFormat(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                         g2.drawLine(debut.x, debut.y, e.getX(), e.getY());
                     }
                     debut = e.getPoint();
@@ -92,8 +88,6 @@ public class DrawingArea extends JPanel {
             }
         });
     }
-  
-  
   
     public void clear() {
         historiqueImages.clear();
@@ -111,4 +105,5 @@ public class DrawingArea extends JPanel {
     this.gommeActive = etat;
 }
 }
+
 

@@ -128,6 +128,30 @@ public class BarMenu extends JMenuBar {
 
         // Ajouter le menu à la barre de menu
         this.add(gameMenu);
+
+         // Ajout du menu Administration
+         JMenu adminMenu = new JMenu("Administration");
+         JMenuItem adminItem = new JMenuItem("Accéder");
+         adminMenu.add(adminItem);
+         this.add(adminMenu);
+ 
+         adminItem.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // Pour obtenir le parent de la barre de menu (la fenêtre principale)
+                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(BarMenu.this);
+                 AdminLoginDialog loginDialog = new AdminLoginDialog(parentFrame);
+                 loginDialog.setVisible(true);
+                 if (loginDialog.isAuthenticated()) {
+                     JFrame adminFrame = new JFrame("Administration");
+                     adminFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                     adminFrame.getContentPane().add(new AdminPanel());
+                     adminFrame.pack();
+                     adminFrame.setLocationRelativeTo(parentFrame);
+                     adminFrame.setVisible(true);
+                 }
+             }
+         });
     }
 
     public String getDifficulty() {

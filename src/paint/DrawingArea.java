@@ -1,4 +1,4 @@
-package paint;
+//package paint;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -13,8 +13,10 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 public class DrawingArea extends JPanel {
-    private  ArdoiseMagique ardoise;  // Référence à la fenêtre principale
-    private  ArdoiseMagiqueFacile ardoiseFacile;
+    @SuppressWarnings("unused")
+    private ArdoiseMagique ardoise;  // Référence à la fenêtre principale
+    @SuppressWarnings("unused")
+    private ArdoiseMagiqueFacile ardoiseFacile;
     private Point debut = null;
     private boolean gommeActive = false;
     private Stack<Image> historiqueImages = new Stack<>();

@@ -33,7 +33,7 @@ public class BarMenu extends JMenuBar {
                 if (game=="pendu"){
                     SwingUtilities.invokeLater(() -> new PenduGraphique().setVisible(true));
                 }else if(game=="drawing"){
-                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile().setVisible(true));
                 }else if(game=="calcul"){
                     SwingUtilities.invokeLater(() -> new CalculFacile());
                 }
@@ -95,7 +95,7 @@ public class BarMenu extends JMenuBar {
                     JOptionPane.showMessageDialog(null, "Veuillez sélectionner une difficulté.", "Erreur", JOptionPane.WARNING_MESSAGE);
 
                 }else if (difficulty == "easy"){
-                    SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
+                    SwingUtilities.invokeLater(() -> new ArdoiseMagiqueFacile().setVisible(true));
                 } else{
                     SwingUtilities.invokeLater(() -> new ArdoiseMagique().setVisible(true));
                 }

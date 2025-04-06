@@ -1,4 +1,4 @@
-package paint;
+//package paint;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,13 +13,14 @@ import javax.swing.SwingUtilities;
 
 public class ArdoiseMagiqueFacile extends JFrame {
     private Color couleurActuelle = Color.RED; // Couleur de départ (rouge)
+    @SuppressWarnings("unused")
     private Point debut = null;
     private float format = 2.0f;
 
     public ArdoiseMagiqueFacile() {
         setTitle("Ardoise Magique");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Panel principal

@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+// @author valentin
+
 public class AdministrationApp {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

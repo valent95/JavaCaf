@@ -3,6 +3,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+// @author valentin
+
 public class AdminPanel extends JPanel {
     private DictionaryManager dictionaryManager;
     private JList<String> wordList;

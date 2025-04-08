@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+// @author valentin
+
 public class ConfigManager {
     private static final String CONFIG_FILE = "src/admin/config.properties";
     private static Properties properties = new Properties();

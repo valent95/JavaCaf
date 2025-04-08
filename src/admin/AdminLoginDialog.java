@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+// @author valentin
+
 public class AdminLoginDialog extends JDialog {
     private boolean authenticated = false;
 

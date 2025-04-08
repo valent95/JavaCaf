@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// @author valentin
+
 public class PenduGraphique extends JFrame {
     private JPanel clavierPanel;
     private JLabel motLabel;
@@ -19,6 +21,8 @@ public class PenduGraphique extends JFrame {
     private char[] clavierAZERTY = {'a','z','e','r','t','y','u','i','o','p','q','s','d','f','g','h','j','k','l','m','w','x','c','v','b','n'};
     private ImageIcon[] etapesPendu;
     private boolean redemarrer = false; // Variable pour indiquer si le jeu doit redémarrer
+
+    
 
     public PenduGraphique() {
         setTitle("Jeu du Pendu");

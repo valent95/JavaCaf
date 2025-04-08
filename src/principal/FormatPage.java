@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
+// @author valentin
+
 public class FormatPage extends JPanel { // Change JFrame à JPanel
     private Image background;
 

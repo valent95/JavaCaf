@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.util.Random;
 import javax.swing.*;
 
+// @author mathis
+
 public class CalculDifficile {
     private JFrame frame;
     private JTextField answerField;

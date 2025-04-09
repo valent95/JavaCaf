@@ -1,5 +1,3 @@
-//package paint;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +9,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Stack;
 import javax.swing.JPanel;
+
+// @author joris
 
 public class DrawingArea extends JPanel {
     @SuppressWarnings("unused")

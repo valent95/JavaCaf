@@ -1,5 +1,3 @@
-//package paint;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -10,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
+
+// @author joris
 
 public class ArdoiseMagiqueFacile extends JFrame {
     private Color couleurActuelle = Color.RED; // Couleur de départ (rouge)

@@ -1,4 +1,3 @@
-//package paint;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -12,11 +11,7 @@ import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-/**
- *
- * @author joris
- */
-
+// @author joris
 
 @SuppressWarnings("unused")
 public class ArdoiseMagique extends JFrame {

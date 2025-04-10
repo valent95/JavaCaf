@@ -121,9 +121,9 @@ public class CalculDifficile {
     private void generateQuestion() {
         solutionShown = false;
         Random rand = new Random();
-        int a = rand.nextInt(1000);  // Changer à 1000 pour des nombres à trois chiffres
-        int b = rand.nextInt(1000);  // Changer à 1000 pour des nombres à trois chiffres
-        int operationType = rand.nextInt(3);  // 0 : addition, 1 : soustraction, 2 : multiplication
+        int a = rand.nextInt(1000); 
+        int b = rand.nextInt(1000); 
+        int operationType = rand.nextInt(3);
 
         if (operationType == 0) {
             // Addition

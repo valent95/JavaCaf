@@ -168,7 +168,7 @@ public class CalculFacile {
 
     private void generateNewQuestion() {
         solutionShown = false;
-        questionsAttempted++; // Une nouvelle question est tentée (perte d'un point)
+        questionsAttempted++;
         updateScore();
         generateQuestion();
     }

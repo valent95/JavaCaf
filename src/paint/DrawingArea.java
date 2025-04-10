@@ -97,6 +97,7 @@ public class DrawingArea extends JPanel {
     public void activerGomme() {
         gommeActive = !gommeActive;
     }
+    
     public boolean getGommeActive(){
         return gommeActive;
     }

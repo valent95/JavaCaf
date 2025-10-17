@@ -1,0 +1,20 @@
+# Ignore compiled Java class files
+*.class
+bin/**/*.class
+bin/*.class
+
+# IDE / editor
+.vscode/
+.idea/
+*.iml
+
+# Build / output
+out/
+target/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary
+*.log
